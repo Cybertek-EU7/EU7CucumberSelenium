@@ -18,11 +18,11 @@ Feature: Account types
 
   Scenario Outline: Login with different accounts <userType>
     Given the user logged in as "<userType>"
-    When the user navigates to "<tab>" "<module>"
+    When the user navigates to "<tab>" "<modules>"
     Then the title contains "<title>"
 
     Examples:
-      | userType      | tab        | module          | title                                                              |
+      | userType      | tab        | modules          | title                                                              |
       | driver        | Fleet      | Vehicles Model  | Vehicles Model - Entities - System - Car - Entities - System       |
       | driver        | Customers  | Accounts        | Accounts - Customers                                               |
       | driver        | Customers  | Contacts        | Contacts - Customers                                               |
