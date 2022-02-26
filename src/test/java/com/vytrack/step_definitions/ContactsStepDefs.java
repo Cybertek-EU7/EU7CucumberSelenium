@@ -72,10 +72,12 @@ public class ContactsStepDefs {
     @When("the user clicks the {string} from contacts")
     public void the_user_clicks_the_from_contacts(String email) {
 
-        BrowserUtils.waitFor(2);
+        BrowserUtils.waitFor(5);
+
         //we have ready method to find email webwelement in pom class before
         //we just get the email from feature file and pass to that method and will click that webelement
         ContactsPage contactsPage = new ContactsPage();
+        contactsPage.waitUntilLoaderScreenDisappear();
         contactsPage.getContactEmail(email).click();
 
     }
@@ -100,7 +102,7 @@ public class ContactsStepDefs {
                 "from orocrm_contact c join orocrm_contact_email e\n" +
                 "on c.id = e.owner_id join orocrm_contact_phone p\n" +
                 "on e.owner_id = p.owner_id\n" +
-                "where e.email='mbrackstone9@example.com'";
+                "where e.email='ranthony@gmail.com'";
         //get info and save in the map
         Map<String, Object> rowMap = DBUtils.getRowMap(query);
 
