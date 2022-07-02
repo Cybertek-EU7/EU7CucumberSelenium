@@ -1,10 +1,12 @@
 package com.vytrack.step_definitions;
 
+import com.vytrack.pages.ContactInfoPage;
 import com.vytrack.pages.ContactsPage;
 import com.vytrack.pages.DashboardPage;
 import com.vytrack.pages.LoginPage;
 import com.vytrack.utilities.BrowserUtils;
 import com.vytrack.utilities.ConfigurationReader;
+import com.vytrack.utilities.DBUtils;
 import com.vytrack.utilities.Driver;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -67,10 +69,10 @@ public class ContactsStepDefs {
     }
     @When("the user clicks the {string} from contacts")
     public void the_user_clicks_the_from_contacts(String email) {
+        BrowserUtils.waitFor(10);
 
         ContactsPage contactsPage = new ContactsPage();
-        WebElement contactEmail = contactsPage.getContactEmail(email);
-        contactEmail.click();
+       contactsPage.getContactEmail(email).click();
 
     }
 
@@ -79,7 +81,35 @@ public class ContactsStepDefs {
 
     @Then("the information should be same with database")
     public void the_information_should_be_same_with_database() {
-BrowserUtils.waitFor(3);
+        ContactInfoPage contactInfoPage = new ContactInfoPage();
+        String actualFullName = contactInfoPage.contactFullName.getText();
+        String actualEmail = contactInfoPage.email.getText();
+        String actualPhoneNumber = contactInfoPage.phone.getText();
+
+        System.out.println(actualFullName);
+        System.out.println(actualEmail);
+        System.out.println(actualPhoneNumber);
+
+        DBUtils.createConnection();
+
+        String query = "select concat(first_name,\" \", last_name) as full_name, e.email, phone from orocrm_contact c join orocrm_contact_email\n" +
+                "e on c.id=e.owner_id join orocrm_contact_phone p on e.owner_id=p.owner_id \n" +
+                "where e.owner_id=67;";
+
+        Map<String, Object> rowMap = DBUtils.getRowMap(query);
+
+        String expectedFullName = (String) rowMap.get("full_name");
+        String expectedEmail = (String) rowMap.get("email");
+        String expectedPhoneNumber = (String) rowMap.get("phone");
+
+        Assert.assertEquals("full name isn't the same",expectedFullName,actualFullName);
+        Assert.assertEquals("email isn't the same",expectedEmail,actualEmail);
+        Assert.assertEquals("phone number isn't the same",expectedPhoneNumber,actualPhoneNumber);
+
+
+        DBUtils.destroy();
+
+
     }
 
 
