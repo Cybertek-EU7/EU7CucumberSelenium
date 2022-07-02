@@ -1,6 +1,5 @@
 package com.vytrack.utilities;
 
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,15 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 public class DBUtils {
-
     private static Connection connection;
     private static Statement statement;
     private static ResultSet resultSet;
 
     public static void createConnection() {
-        String dbUrl = "jdbc:oracle:thin:@awsipadressiyazın:1521:xe";
-        String dbUsername = "hr";
-        String dbPassword = "hr";
+        String dbUrl = ConfigurationReader.get("spartan.DBUrl");
+        String dbUsername = ConfigurationReader.get("spartan.DBusername");
+        String dbPassword = ConfigurationReader.get("spartan.DBpassword");
         try {
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {
@@ -181,10 +179,4 @@ public class DBUtils {
         int rowCount = resultSet.getRow();
         return rowCount;
     }
-
-
-
-
-
-
 }
