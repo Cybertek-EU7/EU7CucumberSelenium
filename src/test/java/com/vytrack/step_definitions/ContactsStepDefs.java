@@ -63,6 +63,20 @@ public class ContactsStepDefs {
         System.out.println("actualName = " + actualName);
 
     }
+    @When("the user clicks the {string} from contacts")
+    public void the_user_clicks_the_from_contacts(String email) {
+
+    }
+
+
+
+
+    @Then("the information should be same with database")
+    public void the_information_should_be_same_with_database() {
+
+    }
+
+
 
 
 }
