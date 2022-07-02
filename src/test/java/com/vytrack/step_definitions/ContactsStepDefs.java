@@ -1,5 +1,6 @@
 package com.vytrack.step_definitions;
 
+import com.vytrack.pages.ContactsPage;
 import com.vytrack.pages.DashboardPage;
 import com.vytrack.pages.LoginPage;
 import com.vytrack.utilities.BrowserUtils;
@@ -9,6 +10,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,10 @@ public class ContactsStepDefs {
     }
     @When("the user clicks the {string} from contacts")
     public void the_user_clicks_the_from_contacts(String email) {
+
+        ContactsPage contactsPage = new ContactsPage();
+        WebElement contactEmail = contactsPage.getContactEmail(email);
+        contactEmail.click();
 
     }
 
