@@ -79,7 +79,7 @@ public class ContactsStepDefs {
 
     @Then("the information should be same with database")
     public void the_information_should_be_same_with_database() {
-
+BrowserUtils.waitFor(3);
     }
 
 
