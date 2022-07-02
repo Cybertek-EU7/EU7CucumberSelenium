@@ -45,7 +45,7 @@ Feature: Contacts page
       | lastname  | Schneider   |
     Then the user should be able to login
 
-    @lorien
+    @lorien@db
     Scenario: Contacts test with email
       Given the user logged in as "sales manager"
       And the user navigates to "Customers" "Contacts"
