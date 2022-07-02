@@ -12,8 +12,8 @@ import org.junit.runner.RunWith;
                 "rerun:target/rerun.txt"},
         features = "src/test/resources/features",
         glue = "com/vytrack/step_definitions",
-        dryRun = false,
-        tags = "@wip12"
+        dryRun = true,
+        tags = "@lorien"
 )
 public class CukesRunner {
 }
